@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require("fs");
 const keys = require("./keys.js");
 const axios = require("axios");
 const moment = require('moment');
@@ -24,7 +25,6 @@ if (userOption === "movie-this") {
                 console.log(JSON.stringify("Rotten Tomatoes Rating: " + response.data.tomatoeRating));
                 console.log(JSON.stringify("IMDB Rating: " + response.data.imdbRating));
                 console.log(response); 
-
             });
     }
 }
@@ -62,6 +62,19 @@ if(userOption === "spotify-this-song"){
                 console.log("Album: " + response.tracks.items[i].album.name);
                 console.log("Song Preview: " + response.tracks.items[i].preview_url);
             }
-        });
+        }); 
     }
+}
+
+//takes instruction from txt file random.txt and performs commands
+if(userOption === "do-what-it-says"){
+fs.readFile("random.txt", "utf8", function(error, data) {
+
+    if (error) {
+      return console.log(error);
+    }
+    console.log(data);
+    // var dataArr = data.split(",");
+    // console.log(dataArr);
+  });
 }
