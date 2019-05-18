@@ -1,26 +1,34 @@
-//Setting variables for the user inputs
+//Setting global variables
+require("dotenv").config();
+const keys = require("./keys.js");
+const Spotify = require('node-spotify-api');
+const axios = require("axios");
+const spotify = new Spotify(keys.spotify);
+const moment = require('moment');
 var userOption = process.argv[2];
 var userInput = process.argv.slice(3).join(" ");
 
+var movie = require("./moviethis");
+var concert = require("./concertthis");
+
+var omdbAPI = new movie();
+var bandsAPI = new concert()
+
 //Exporting the userInput to the moviethis file to call the OMDB API
 if (userOption === "movie-this") {
-    if (userInput === undefined) {
-        userInput = "Mr. Nobody";
-        module.exports = userInput;
-        require("./moviethis");
+    if (!userInput){
+        omdbAPI.getMovie("Mr. Nobody");
     } else {
-        module.exports = userInput;
-        require("./moviethis");
+        omdbAPI.getMovie(userInput);
     };
 };
 
 //Exporting the userInput to the concertthis file to call the Bands in Town API
 if (userOption === "concert-this") {
-    if (userInput === undefined) {
-        console.log("undefined");
+    if (!userInput) {
+        bandsAPI.getConcert("the sign");
     } else {
-        module.exports = userInput;
-        require("./concertthis");
+        bandsAPI.getConcert(userInput);
     };
 };
 
