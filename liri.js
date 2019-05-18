@@ -7,25 +7,17 @@ const Spotify = require('node-spotify-api');
 const spotify = new Spotify(keys.spotify);
 var userOption = process.argv[2];
 var userInput = process.argv.slice(3);
+var importOMDB = require("./omdb");
+// module.exports = userInput;
 
 
 //Function that gathers movie info from the OMDB api
 if (userOption === "movie-this") {
     if (userInput === undefined) {
-        console.log("undefined");
+        userInput === "Mr.Nobody";
     } else {
-        axios.get("https://www.omdbapi.com/?t=" + userInput + "&tomatoes=true&apikey=trilogy")
-            .then(response => {
-                console.log(JSON.stringify("Title: " + response.data.Title));
-                console.log(JSON.stringify("Year: " + response.data.Year));
-                console.log(JSON.stringify("Actors: " + response.data.Actors));
-                console.log(JSON.stringify("Plot: " + response.data.Plot));
-                console.log(JSON.stringify("Language: " + response.data.Language));
-                console.log(JSON.stringify("Country Produced: " + response.data.Country));
-                console.log(JSON.stringify("Rotten Tomatoes Rating: " + response.data.tomatoeRating));
-                console.log(JSON.stringify("IMDB Rating: " + response.data.imdbRating));
-                console.log(response);
-            });
+        module.exports = {userInput};
+    
     };
 };
 
@@ -51,7 +43,7 @@ if (userOption === "concert-this") {
 //Getting the song info from the Spotify API
 if (userOption === "spotify-this-song") {
     if (userInput === undefined) {
-        console.log(undefined);
+        userInput === "the sign";
     } else {
         spotify.search({
                 type: 'track',
