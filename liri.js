@@ -10,13 +10,15 @@ var userInput = process.argv.slice(3).join(" ");
 
 var movie = require("./moviethis");
 var concert = require("./concertthis");
+var song = require("./spotifythissong");
 
 var omdbAPI = new movie();
-var bandsAPI = new concert()
+var bandsAPI = new concert();
+var spotifyAPI = new song();
 
 //Exporting the userInput to the moviethis file to call the OMDB API
 if (userOption === "movie-this") {
-    if (!userInput){
+    if (!userInput) {
         omdbAPI.getMovie("Mr. Nobody");
     } else {
         omdbAPI.getMovie(userInput);
@@ -25,21 +27,15 @@ if (userOption === "movie-this") {
 
 //Exporting the userInput to the concertthis file to call the Bands in Town API
 if (userOption === "concert-this") {
-    if (!userInput) {
-        bandsAPI.getConcert("the sign");
-    } else {
-        bandsAPI.getConcert(userInput);
-    };
+    bandsAPI.getConcert(userInput);
 };
 
 //Exporting the userInput to the spotifythissong file to call the Spotify API
 if (userOption === "spotify-this-song") {
     if (!userInput) {
-        module.exports = "the sign";
-        require("./spotifythissong");
+        spotifyAPI.getSong("the sign");
     } else {
-        module.exports = userInput;
-        require("./spotifythissong");
+        spotifyAPI.getSong(userInput);
     };
 };
 
