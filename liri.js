@@ -6,37 +6,29 @@ const moment = require('moment');
 const Spotify = require('node-spotify-api');
 const spotify = new Spotify(keys.spotify);
 var userOption = process.argv[2];
-var userInput = process.argv.slice(3);
-var importOMDB = require("./omdb");
-// module.exports = userInput;
+var userInput = process.argv.slice(3).join(" ");
 
 
-//Function that gathers movie info from the OMDB api
+
+//Exporting the userInput to the moviethis file to call the OMDB API
 if (userOption === "movie-this") {
     if (userInput === undefined) {
-        userInput === "Mr.Nobody";
+        userInput = "Mr. Nobody";
+        module.exports = userInput;
+        require("./moviethis");
     } else {
-        module.exports = {userInput};
-    
+        module.exports = userInput;
+        require("./moviethis");
     };
 };
 
-//Getting concert info from the Bands in Town API
+//Exporting the userInput to the concertthis file to call the Bands in Town API
 if (userOption === "concert-this") {
     if (userInput === undefined) {
         console.log("undefined");
     } else {
-        axios.get("https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp")
-            .then(response => {
-                // console.log(response.data);
-                for (i = 0; i < response.data.length; i++) {
-                    console.log(response.data[i].venue.name);
-                    console.log(response.data[i].venue.city);
-                    var dateTimeConverted = response.data[i].datetime;
-                    dateTimeConverted = moment(dateTimeConverted).format("MM/DD/YYYY");
-                    console.log(dateTimeConverted);
-                };
-            })
+        module.exports = userInput;
+        require("./concertthis");
     };
 };
 
@@ -45,19 +37,8 @@ if (userOption === "spotify-this-song") {
     if (userInput === undefined) {
         userInput === "the sign";
     } else {
-        spotify.search({
-                type: 'track',
-                query: userInput
-            })
-            .then(response => {
-                // console.log(response.tracks.items);
-                for (i = 0; i < 4; i++) {
-                    console.log("Artist: " + JSON.stringify(response.tracks.items[i].artists[0].name));
-                    console.log("Track Name: " + response.tracks.items[i].name);
-                    console.log("Album: " + response.tracks.items[i].album.name);
-                    console.log("Song Preview: " + response.tracks.items[i].preview_url);
-                };
-            });
+        module.exports = userInput;
+        // require("./spotifythissong");
     };
 };
 
