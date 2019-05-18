@@ -1,14 +1,6 @@
-require("dotenv").config();
-const fs = require("fs");
-const keys = require("./keys.js");
-const axios = require("axios");
-const moment = require('moment');
-const Spotify = require('node-spotify-api');
-const spotify = new Spotify(keys.spotify);
+//Setting variables for the user inputs
 var userOption = process.argv[2];
 var userInput = process.argv.slice(3).join(" ");
-
-
 
 //Exporting the userInput to the moviethis file to call the OMDB API
 if (userOption === "movie-this") {
@@ -32,13 +24,14 @@ if (userOption === "concert-this") {
     };
 };
 
-//Getting the song info from the Spotify API
+//Exporting the userInput to the spotifythissong file to call the Spotify API
 if (userOption === "spotify-this-song") {
-    if (userInput === undefined) {
-        userInput === "the sign";
+    if (!userInput) {
+        module.exports = "the sign";
+        require("./spotifythissong");
     } else {
         module.exports = userInput;
-        // require("./spotifythissong");
+        require("./spotifythissong");
     };
 };
 
