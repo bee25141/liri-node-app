@@ -55,7 +55,6 @@ if (userOption === "do-what-it-says") {
                         query: userInput
                     })
                     .then(response => {
-                        // console.log(response.tracks.items);
                         for (i = 0; i < 4; i++) {
                             console.log("Artist: " + JSON.stringify(response.tracks.items[i].artists[0].name));
                             console.log("Track Name: " + response.tracks.items[i].name);
@@ -79,7 +78,6 @@ if (userOption === "do-what-it-says") {
             } else if (dataArray[0] === "concert-this") {
                 axios.get("https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp")
                     .then(response => {
-                        // console.log(response.data);
                         for (i = 0; i < response.data.length; i++) {
                             console.log(response.data[i].venue.name);
                             console.log(response.data[i].venue.city);

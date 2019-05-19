@@ -16,4 +16,5 @@ var movie = function () {
             });
     }
 }
+
 module.exports = movie;

@@ -1,3 +1,4 @@
+//This file uses the users input query to call the Spotify API and return song data
 require("dotenv").config();
 const keys = require("./keys.js");
 const Spotify = require('node-spotify-api');
@@ -10,7 +11,6 @@ var song = function () {
                 query: userSong
             })
             .then(response => {
-                // console.log(response.tracks.items);
                 for (i = 0; i < 4; i++) {
                     console.log("Artist: " + JSON.stringify(response.tracks.items[i].artists[0].name));
                     console.log("Track Name: " + response.tracks.items[i].name);
@@ -20,4 +20,5 @@ var song = function () {
             });
     };
 };
+
 module.exports = song;
