@@ -5,6 +5,7 @@ const Spotify = require('node-spotify-api');
 const axios = require("axios");
 const spotify = new Spotify(keys.spotify);
 const moment = require('moment');
+const fs = require("fs");
 var userOption = process.argv[2];
 var userInput = process.argv.slice(3).join(" ");
 
